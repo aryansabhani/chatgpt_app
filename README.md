@@ -1,16 +1,34 @@
-# chatgpt_app
+<header>
+<h1> ChatGpt App </h1>
+ 
+<h2>🗒 Project Description:</h2>
+<p>
+Project Overview:
+ChatGPT Flutter App: This app enables users to engage in real-time chat with OpenAI’s ChatGPT language model.
+Text-to-Image Generation: Additionally, it can convert textual responses from ChatGPT into visual images.
+  Key Features:
+User-Friendly Interface: The app provides an intuitive chat interface for users to interact with the AI.
+Dynamic Responses: ChatGPT generates detailed answers across various topics.
+Text-to-Image Conversion: When ChatGPT produces a response, the app can create an image representation of that text.
+</p>
 
-A new Flutter project.
+<h2>⚙️ Project Objectives:</h2>  
+<p>
+Develop a mobile chat application that allows users to interact with OpenAI’s ChatGPT language model.
+<h2>Project Technologies:</h2>
 
-## Getting Started
+<p>- Dart language</p>
 
-This project is a starting point for a Flutter application.
+ <h2>📽️ Video:-</h2>
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+ <h2>📲 Screenshot:-</h2>
+ 
+<img src="https://github.com/aryansabhani/chatgpt_app/assets/112259316/a54b9e7c-2692-4057-af32-4c579c50e534"  height="400">
+<img src="https://github.com/aryansabhani/chatgpt_app/assets/112259316/55204e73-71b5-4837-b4fd-103b1aabf263" height="400">
+
+ 
+</header>
+
