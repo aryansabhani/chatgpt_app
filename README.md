@@ -21,6 +21,10 @@ Develop a mobile chat application that allows users to interact with OpenAI’s 
 
  <h2>📽️ Video:-</h2>
 
+https://github.com/aryansabhani/chatgpt_app/assets/112259316/1db66c8c-6018-4456-8672-f9ecde0dcf85
+
+
+
 
 
 
