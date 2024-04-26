@@ -1,5 +1,5 @@
 <header>
-<h1> ChatGpt App </h1>
+<h1> AI App </h1>
  
 <h2>🗒 Project Description:</h2>
 <p>
@@ -29,9 +29,21 @@ https://github.com/aryansabhani/chatgpt_app/assets/112259316/1db66c8c-6018-4456-
 
 
  <h2>📲 Screenshot:-</h2>
- 
-<img src="https://github.com/aryansabhani/chatgpt_app/assets/112259316/a54b9e7c-2692-4057-af32-4c579c50e534"  height="400">
-<img src="https://github.com/aryansabhani/chatgpt_app/assets/112259316/55204e73-71b5-4837-b4fd-103b1aabf263" height="400">
+
+
+
+
+
+<img src="https://github.com/aryansabhani/chatgpt_app/assets/112259316/75a608f2-5cb9-457d-a2f4-269c7f10d424"  height="400">
+<img src="https://github.com/aryansabhani/chatgpt_app/assets/112259316/079df967-cf28-4686-9213-30e1970a9412" height="400">
+
+<img src="https://github.com/aryansabhani/chatgpt_app/assets/112259316/7e5bcb41-a1f6-4f8e-a083-e35dcf11e14f" height="400">
+<img src="https://github.com/aryansabhani/chatgpt_app/assets/112259316/65c7ec42-c959-45cc-957c-6803d7073c27" height="400">
+<img src="https://github.com/aryansabhani/chatgpt_app/assets/112259316/12f5ca21-167b-4821-af33-33ef3e2126e8" height="400">
+<img src="https://github.com/aryansabhani/chatgpt_app/assets/112259316/8ac656c8-bca3-47f2-bd6b-cd76c637f5c1" height="400">
+<img src="https://github.com/aryansabhani/chatgpt_app/assets/112259316/cc2861b2-2f42-4637-8c06-7cefb98d12bc" height="400">
+
+
 
 ![image](https://github.com/aryansabhani/chatgpt_app/assets/112259316/3d6c5736-4cd2-4d4f-a8ee-48a57f4ec6f0)
 
