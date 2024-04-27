@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -14,7 +15,7 @@ class ImageGenHelper {
     try {
       Map<String, dynamic> headers = {
         'Authorization':
-        'Bearer vk-OX2hbLYKIBjxYDLPUj4LjJto2PN2s33I4Nb2LH0F7N2SFD0J	'
+        'Bearer vk-k9qtHQEhVHEAKMD5iWEg6X6DEDpe3qEP4qgpoDbf9sxTW'
       };
 
       Map<String, dynamic> payload = {
@@ -31,14 +32,15 @@ class ImageGenHelper {
       final response = await dio.post(apiUrl, data: formData);
       if (response.statusCode == 200) {
         Uint8List uint8List = Uint8List.fromList(response.data);
+        log('${uint8List.length}');
         return uint8List;
       } else {
-        print('Failed to imagin data: ${response.statusCode}');
+        log('Failed to imagin data: ${response.statusCode}');
 
         return null;
       }
     } catch (e) {
-      print('Exception while imagining data: $e');
+      log('Exception while imagining data: $e');
       return null;
     }
   }

@@ -41,6 +41,8 @@ dependencies:
   dart_openai: ^5.1.0
   dio:
   path_provider: ^2.0.5
+  animated_splash_screen:
+  provider: 
 
 
 dev_dependencies:

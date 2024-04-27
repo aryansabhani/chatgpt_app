@@ -1,13 +1,13 @@
 import 'dart:developer';
 
-import 'package:chatgpt_app/helper/chatgpthelper.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
-import '../modal/messageModal.dart';
+import '../../Controller/ThemeController.dart';
+import '../../modal/MessageModal.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -25,6 +25,8 @@ class _ChatScreenState extends State<ChatScreen> {
   );
 
   static List<Message> messages = [];
+
+  bool isLoading = false;
 
   Future<void> sendMessage() async {
     final message = _userInput.text;
@@ -47,11 +49,12 @@ class _ChatScreenState extends State<ChatScreen> {
           date: DateTime.now()));
     }
     setState(() {});
-    Navigator.pop(context);
+    // Navigator.pop(context);
     setState(() {
-      scrollController
-          .jumpTo(scrollController.positions.last.maxScrollExtent);
+      scrollController.jumpTo(scrollController.positions.last.maxScrollExtent);
     });
+
+    isLoading = false;
   }
 
   ScrollController scrollController = ScrollController();
@@ -61,62 +64,44 @@ class _ChatScreenState extends State<ChatScreen> {
     final s = MediaQuery.of(context).size;
     return Scaffold(
       bottomSheet: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Expanded(
-                flex: 15,
-                child: TextFormField(
-                  // style: TextStyle(color: Colors.white),
-                  controller: _userInput,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      label: Text('Enter Your Message')),
-                ),
+        height: s.height * 0.1,
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(12),
+        // color: Provider.of<ThemeController>(context).isDarkMode ? Color(0xFF121212) : Colors.white,
+        child: TextFormField(
+          // style: TextStyle(color: Colors.white),
+          controller: _userInput,
+
+          decoration: InputDecoration(
+              suffixIcon: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: IconButton(
+                    padding: EdgeInsets.all(12),
+                    // iconSize: 30,
+                    style: ButtonStyle(
+                        backgroundColor:
+                            Provider.of<ThemeController>(context).isDarkMode
+                                ? MaterialStateProperty.all(Colors.black26)
+                                : MaterialStateProperty.all(Color(0xffEB8A71)),
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                        shape: MaterialStateProperty.all(CircleBorder())),
+                    onPressed: () {
+                      SystemChannels.textInput.invokeMethod('TextInput.hide');
+                      isLoading = true;
+                      sendMessage();
+                      _userInput.clear();
+                    },
+                    icon: isLoading
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Icon(Icons.telegram)),
               ),
-              Spacer(),
-              IconButton(
-                  padding: EdgeInsets.all(12),
-                  // iconSize: 30,
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.deepPurpleAccent),
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
-                      shape: MaterialStateProperty.all(CircleBorder())),
-                  onPressed: () {
-                    SystemChannels.textInput.invokeMethod('TextInput.hide');
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return PopScope(
-                            canPop: false,
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.2)),
-                                height: double.maxFinite,
-                                width: double.maxFinite,
-                                alignment: Alignment.center,
-                                child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    child: CircularProgressIndicator(
-                                      color: Colors.white,
-                                    ))),
-                            onPopInvoked: (val) async {});
-                      },
-                    );
-                    sendMessage();
-                    _userInput.clear();
-                    scrollController
-                        .jumpTo(scrollController.positions.last.maxScrollExtent);
-                  },
-                  icon: Icon(Icons.send_outlined))
-            ],
-          ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              label: Text('Enter Your Question')),
         ),
       ),
       body: Container(
@@ -128,26 +113,11 @@ class _ChatScreenState extends State<ChatScreen> {
             // )
             ),
         child: messages.length == 0
-            ? Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                // crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    height: s.height * 0.20,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('asstes/image/gemini.png'),
-                          fit: BoxFit.fitHeight),
-                    ),
-                    alignment: Alignment.bottomCenter,
-                    child: Text(
-                      'Start Chatting...',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                ],
+            ? Center(
+                child: Text(
+                  'Ask anything, get yout answer',
+                  style: TextStyle(fontWeight: FontWeight.w500),
+                ),
               )
             : ListView.builder(
                 itemCount: messages.length,
@@ -157,10 +127,10 @@ class _ChatScreenState extends State<ChatScreen> {
                 itemBuilder: (context, index) {
                   final message = messages[index];
                   return Column(
-                    // crossAxisAlignment: CrossAxisAlignment.end,
                     // mainAxi
                     // sAlignment: MainAxisAlignment.,
-                    children: [
+                    children: [                    // crossAxisAlignment: CrossAxisAlignment.end,
+
                       Align(
                         alignment: message.isUser
                             ? Alignment.centerRight
@@ -180,8 +150,8 @@ class _ChatScreenState extends State<ChatScreen> {
                           //     right: message.isUser ? 10 : 150),
                           decoration: BoxDecoration(
                               color: message.isUser
-                                  ? Colors.deepPurpleAccent
-                                  : Colors.grey.shade400,
+                                  ? Color(0xffEB8A71)
+                                  : Provider.of<ThemeController>(context).isDarkMode ? Colors.white70 :Colors.black12 ,
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(10),
                                   bottomLeft: message.isUser
@@ -204,15 +174,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                         ? Colors.white
                                         : Colors.black),
                               ),
-                              Text(
-                                DateFormat('HH:mm').format(message.date),
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: message.isUser
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                              )
                             ],
                           ),
                         ),
